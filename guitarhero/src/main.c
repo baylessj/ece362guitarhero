@@ -1,8 +1,7 @@
 /**
  * ECE 362 Mini-Project: Guitar Hero
  */
-#include "globals.h"
-#include "lcd.h"
+#include "main.h"
 
 int hit_notes = 0, missed_notes = 0;
 

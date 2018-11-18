@@ -1,9 +1,7 @@
 /**
  * LCD code
  */
-#include "globals.h"
-#include "lcd.h"
-//#include "songs.c"
+#include "main.h"
 
 void lcd_update(int song_position) {
 	unsigned char notes;
