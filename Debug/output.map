@@ -2768,18 +2768,18 @@ Discarded input sections
  .text.GLCD_DisableController
                 0x00000000       0x5c src/KS0108-STM32.o
  .text.GLCD_ReadStatus
-                0x00000000       0xa8 src/KS0108-STM32.o
+                0x00000000       0xb4 src/KS0108-STM32.o
  .text.GLCD_WriteCommand
-                0x00000000       0xd4 src/KS0108-STM32.o
+                0x00000000       0xe0 src/KS0108-STM32.o
  .text.GLCD_ReadData
-                0x00000000       0xc0 src/KS0108-STM32.o
+                0x00000000       0xcc src/KS0108-STM32.o
  .text.GLCD_WriteData
-                0x00000000      0x100 src/KS0108-STM32.o
+                0x00000000      0x10c src/KS0108-STM32.o
  .text.GLCD_InitializePorts
-                0x00000000       0x4c src/KS0108-STM32.o
+                0x00000000       0x68 src/KS0108-STM32.o
  .text.GLCD_ReadByteFromROMMemory
                 0x00000000       0x14 src/KS0108-STM32.o
- .debug_info    0x00000000      0x41e src/KS0108-STM32.o
+ .debug_info    0x00000000      0x4e9 src/KS0108-STM32.o
  .debug_abbrev  0x00000000      0x192 src/KS0108-STM32.o
  .debug_aranges
                 0x00000000       0x60 src/KS0108-STM32.o
@@ -2816,8 +2816,8 @@ Discarded input sections
  .debug_macro   0x00000000      0x34d src/KS0108-STM32.o
  .debug_macro   0x00000000       0x34 src/KS0108-STM32.o
  .debug_macro   0x00000000       0x3a src/KS0108-STM32.o
- .debug_line    0x00000000      0x65b src/KS0108-STM32.o
- .debug_str     0x00000000    0x2bf52 src/KS0108-STM32.o
+ .debug_line    0x00000000      0x666 src/KS0108-STM32.o
+ .debug_str     0x00000000    0x2bfa5 src/KS0108-STM32.o
  .comment       0x00000000       0x7f src/KS0108-STM32.o
  .debug_frame   0x00000000      0x12c src/KS0108-STM32.o
  .ARM.attributes

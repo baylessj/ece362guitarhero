@@ -9,7 +9,7 @@
 #include "stm32f0xx_rcc.h"
 #include "stm32f0xx_misc.h"
 
-#define KS0108_PORT  GPIOA
+#define KS0108_PORT  GPIOA //check if this works with the desired comm protocol
 
 #define KS0108_RS    GPIO_Pin_8
 #define KS0108_RW    GPIO_Pin_9
@@ -66,7 +66,8 @@ unsigned char status;
 
 GPIO_StructInit(&GPIO_InitStructure);
 GPIO_InitStructure.GPIO_Pin = 0xFF << KS0108_D0;
-//GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
+GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
 GPIO_Init(KS0108_PORT, &GPIO_InitStructure);
 
 GPIO_SetBits(KS0108_PORT, KS0108_RW);
@@ -88,7 +89,8 @@ void GLCD_WriteCommand(unsigned char commandToWrite, unsigned char controller)
 while(GLCD_ReadStatus(controller)&DISPLAY_STATUS_BUSY);
 GPIO_StructInit(&GPIO_InitStructure);
 GPIO_InitStructure.GPIO_Pin  = (0xFF << KS0108_D0);
-//GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
 GPIO_Init(KS0108_PORT, &GPIO_InitStructure);
 
 GPIO_ResetBits(KS0108_PORT, KS0108_RS | KS0108_RW);
@@ -115,7 +117,8 @@ unsigned char tmp;
 while(GLCD_ReadStatus(screen_x / 64)&DISPLAY_STATUS_BUSY);
 GPIO_StructInit(&GPIO_InitStructure);  
 GPIO_InitStructure.GPIO_Pin = 0xFF << KS0108_D0;
-//GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
+GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
 GPIO_Init(KS0108_PORT, &GPIO_InitStructure);
 
 GPIO_SetBits(KS0108_PORT, KS0108_RS | KS0108_RW);
@@ -139,7 +142,8 @@ while(GLCD_ReadStatus(screen_x / 64)&DISPLAY_STATUS_BUSY);
    
 GPIO_StructInit(&GPIO_InitStructure);
 GPIO_InitStructure.GPIO_Pin = (0xFF << KS0108_D0);
-//GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
 GPIO_Init(KS0108_PORT, &GPIO_InitStructure);
 
 GPIO_ResetBits(KS0108_PORT, KS0108_RW);
@@ -166,11 +170,13 @@ void GLCD_InitializePorts(void)
 {
 volatile unsigned long i;
 
-//RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOE, ENABLE);
+//RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+RCC->AHBENR |= RCC_AHBENR_GPIOAEN;
 GPIO_StructInit(&GPIO_InitStructure);
 GPIO_InitStructure.GPIO_Pin   =  GPIO_Pin_All;
 GPIO_InitStructure.GPIO_Speed =  GPIO_Speed_2MHz;
-//GPIO_InitStructure.GPIO_Mode  =  GPIO_Mode_Out_PP;
+GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
 
 GPIO_Init(KS0108_PORT, &GPIO_InitStructure);
 GPIO_Write(KS0108_PORT, KS0108_CS1 | KS0108_CS2 | KS0108_CS3 | KS0108_RS | KS0108_RW | (0xFF << KS0108_D0));
