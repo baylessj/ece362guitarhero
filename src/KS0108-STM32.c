@@ -3,9 +3,13 @@
 // STM32 MCU low-level driver
 // (c) Rados³aw Kwiecieñ, radek@dxp.pl
 //-------------------------------------------------------------------------------------------------
-#include "stm32f10x_lib.h"
+#include "stm32f0xx.h"
+#include "stm32f0xx_gpio.h"
+#include "stm32f0xx_spi.h"
+#include "stm32f0xx_rcc.h"
+#include "stm32f0xx_misc.h"
 
-#define KS0108_PORT  GPIOE
+#define KS0108_PORT  GPIOA
 
 #define KS0108_RS    GPIO_Pin_8
 #define KS0108_RW    GPIO_Pin_9
@@ -62,7 +66,7 @@ unsigned char status;
 
 GPIO_StructInit(&GPIO_InitStructure);
 GPIO_InitStructure.GPIO_Pin = 0xFF << KS0108_D0;
-GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+//GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
 GPIO_Init(KS0108_PORT, &GPIO_InitStructure);
 
 GPIO_SetBits(KS0108_PORT, KS0108_RW);
@@ -84,7 +88,7 @@ void GLCD_WriteCommand(unsigned char commandToWrite, unsigned char controller)
 while(GLCD_ReadStatus(controller)&DISPLAY_STATUS_BUSY);
 GPIO_StructInit(&GPIO_InitStructure);
 GPIO_InitStructure.GPIO_Pin  = (0xFF << KS0108_D0);
-GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+//GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 GPIO_Init(KS0108_PORT, &GPIO_InitStructure);
 
 GPIO_ResetBits(KS0108_PORT, KS0108_RS | KS0108_RW);
@@ -111,7 +115,7 @@ unsigned char tmp;
 while(GLCD_ReadStatus(screen_x / 64)&DISPLAY_STATUS_BUSY);
 GPIO_StructInit(&GPIO_InitStructure);  
 GPIO_InitStructure.GPIO_Pin = 0xFF << KS0108_D0;
-GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+//GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
 GPIO_Init(KS0108_PORT, &GPIO_InitStructure);
 
 GPIO_SetBits(KS0108_PORT, KS0108_RS | KS0108_RW);
@@ -135,7 +139,7 @@ while(GLCD_ReadStatus(screen_x / 64)&DISPLAY_STATUS_BUSY);
    
 GPIO_StructInit(&GPIO_InitStructure);
 GPIO_InitStructure.GPIO_Pin = (0xFF << KS0108_D0);
-GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+//GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 GPIO_Init(KS0108_PORT, &GPIO_InitStructure);
 
 GPIO_ResetBits(KS0108_PORT, KS0108_RW);
@@ -160,13 +164,13 @@ screen_x++;
 //-------------------------------------------------------------------------------------------------
 void GLCD_InitializePorts(void)
 {
-vu32 i;
+volatile unsigned long i;
 
-RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOE, ENABLE);
+//RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOE, ENABLE);
 GPIO_StructInit(&GPIO_InitStructure);
 GPIO_InitStructure.GPIO_Pin   =  GPIO_Pin_All;
 GPIO_InitStructure.GPIO_Speed =  GPIO_Speed_2MHz;
-GPIO_InitStructure.GPIO_Mode  =  GPIO_Mode_Out_PP;
+//GPIO_InitStructure.GPIO_Mode  =  GPIO_Mode_Out_PP;
 
 GPIO_Init(KS0108_PORT, &GPIO_InitStructure);
 GPIO_Write(KS0108_PORT, KS0108_CS1 | KS0108_CS2 | KS0108_CS3 | KS0108_RS | KS0108_RW | (0xFF << KS0108_D0));
