@@ -12,7 +12,7 @@
   #define OFF	0x00
 #define DISPLAY_STATUS_BUSY	0x80
 
-void GLCD_Initalize(void);
+void GLCD_Initialize(void);
 void GLCD_WriteData(unsigned char);
 void GLCD_WriteCommand(unsigned char, unsigned char);
 void GLCD_ClearScreen(void);
