@@ -3,15 +3,27 @@
  */
 #include "globals.h"
 
-unsigned char song1[SONG_LENGTH]= {
+unsigned char song[SONG_LENGTH]= {
 		0b0,
-		0b01010,
-		0b10000
-};
-
-unsigned char song2[SONG_LENGTH] = {
-		0b0,
-		0b01010,
-		0b10000
+		0b10000,
+		0b10000,
+		0b00000,
+		0b00000,
+		0b00100,
+		0b00000,
+		0b00000,
+		0b00000,
+		0b01000,
+		0b00000,
+		0b00000,
+		0b00010,
+		0b00000,
+		0b00000,
+		0b00000,
+		0b01000,
+		0b00000,
+		0b00010,
+		0b00000,
+		0b00000,
 };
 

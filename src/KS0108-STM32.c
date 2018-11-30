@@ -20,7 +20,7 @@
 
 #define KS0108_DATA_PORT GPIOA
 #define KS0108_D0        5
-// D0-D7 are in 8-15
+// D0-D7 are in 5-12
 
 #define DISPLAY_STATUS_BUSY	0x80
 
@@ -42,8 +42,14 @@ void GLCD_Delay(void)
 void GLCD_EnableController(unsigned char controller)
 {
 switch(controller){
-	case 0 : GPIO_ResetBits(KS0108_SWITCH_PORT, KS0108_CS1); break;
-	case 1 : GPIO_ResetBits(KS0108_SWITCH_PORT, KS0108_CS2); break;
+	case 0 :
+		GPIO_ResetBits(KS0108_SWITCH_PORT, KS0108_CS1);
+		GPIO_SetBits(KS0108_SWITCH_PORT, KS0108_CS2);
+		break;
+	case 1 :
+		GPIO_ResetBits(KS0108_SWITCH_PORT, KS0108_CS2);
+		GPIO_SetBits(KS0108_SWITCH_PORT, KS0108_CS1);
+		break;
 	default: break;
 	}
 }
@@ -53,8 +59,12 @@ switch(controller){
 void GLCD_DisableController(unsigned char controller)
 {
 switch(controller){
-	case 0 : GPIO_SetBits(KS0108_SWITCH_PORT, KS0108_CS1); break;
-	case 1 : GPIO_SetBits(KS0108_SWITCH_PORT, KS0108_CS2); break;
+	case 0 :
+		GPIO_ResetBits(KS0108_SWITCH_PORT, KS0108_CS2);
+		break;
+	case 1 :
+		GPIO_ResetBits(KS0108_SWITCH_PORT, KS0108_CS1);
+		break;
 	default: break;
 	}
 }
