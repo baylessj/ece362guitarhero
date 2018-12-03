@@ -9,5 +9,6 @@
 
 #include "globals.h"
 #include "lcd.h"
+#include "strum.h"
 
 #endif

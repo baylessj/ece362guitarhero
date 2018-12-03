@@ -2,24 +2,22 @@
  * LCD code
  */
 #include "main.h"
-char str[24];
+char str[SCREEN_LENGTH + 1];
 void lcd_update(int song_position) {
-	// characters are 5 pixels wide, display is 128 wide, so we can fit 25 chars
-
-	GLCD_ClearScreen();
- 	int pad = song_position + SCREEN_LENGTH - 1 - SONG_LENGTH;
-	if (pad < 0) pad = 0;
+ 	int num_notes_remaining = SONG_LENGTH - song_position;
+ 	if (num_notes_remaining > SCREEN_LENGTH)
+ 		num_notes_remaining = SCREEN_LENGTH;
 	for (int i = 0; i < NUM_BUTTONS; i++) {
-		for (int j = 0; j <= (SCREEN_LENGTH - 1 - pad); j++) {
-			unsigned char notes = song[song_position - j + SCREEN_LENGTH - pad];
+		for (int j = 0; j < num_notes_remaining; j++) {
+			unsigned char notes = song[song_position + num_notes_remaining - j - 1];
 			unsigned char note = notes & (1 << i);
 			if (note) {
-				str[j + pad] = '-';
+				str[j + SCREEN_LENGTH - num_notes_remaining] = '-';
 			} else {
-				str[j + pad] = ' ';
+				str[j + SCREEN_LENGTH - num_notes_remaining] = ' ';
 			}
 		}
-		str[SCREEN_LENGTH - 1] = '\0';
+		str[SCREEN_LENGTH] = '\0';
 		GLCD_GoTo(0, 7 - i);
 		GLCD_WriteString(str);
 	}

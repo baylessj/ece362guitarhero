@@ -6,5 +6,6 @@
 
 void lcd_init();
 void lcd_update(int song_position);
+void lcd_print_beginning();
 
 #endif

@@ -1,0 +1,5 @@
+"src/lcd.o"
+"src/main.o"
+"src/songs.o"
+"startup/startup_stm32.o"
+"startup/sysmem.o"

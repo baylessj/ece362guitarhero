@@ -16,7 +16,7 @@ extern int hit_notes, missed_notes;
 
 extern unsigned char song[SONG_LENGTH];
 
-#define LOOP_WAIT 500000000
+#define LOOP_WAIT 1000000000
 
 void nano_wait(int t);
 
