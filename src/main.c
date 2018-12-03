@@ -19,7 +19,7 @@ int main() {
 	GLCD_ClearScreen();
 	strum_init();
 
-	// Prints the first 23 rows before the user will interact with the notes
+	// Fills the screen width before the user will interact with the notes
 	lcd_print_beginning();
 
 	// Main Loop

@@ -52,7 +52,7 @@ static int strum_hit() {
 	int new = adc_read();
 
 //	if((0x0223 < old_reading) && (old_reading < 0x02EB)) { //Idle Range
-		if(!((0x0223 < new) && (new < 0x02EB))) {
+		if(((600 < new))) {
 			return 1;
 		}
 //	}
@@ -68,7 +68,7 @@ int check_if_note_hit(int song_position) {
 
 	if (!notes) return 0;
 
-	if ((notes & buttons_read()) && strum_hit())
+if ((notes & buttons_read()) && strum_hit())
 		return 1;
 	else
 		return -1;
